@@ -1,0 +1,10 @@
+# 运行依赖(Windows)
+pyautogui>=0.9.54
+opencv-python>=4.8.0
+numpy>=1.24.0
+pillow>=10.0.0
+pyperclip>=1.8.2
+pywin32>=306
+
+# 打包(仅开发者本地打包 exe 时需要)
+# pyinstaller>=6.0
