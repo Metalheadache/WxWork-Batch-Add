@@ -1,0 +1,56 @@
+name: verify-release-asset
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/verify-v1.0.0'
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify v1.0.0 release asset
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const tag = 'v1.0.0';
+            const assetName = 'WxWorkBatchAdd.exe';
+            let state = 'failure';
+            let description = `${assetName} not found`;
+            let targetUrl = `https://github.com/${owner}/${repo}/releases/tag/${tag}`;
+
+            try {
+              const { data: release } = await github.rest.repos.getReleaseByTag({ owner, repo, tag });
+              targetUrl = release.html_url;
+              const asset = release.assets.find(item => item.name === assetName);
+              if (!asset) {
+                throw new Error(`${assetName} is missing from release ${tag}`);
+              }
+              if (asset.state !== 'uploaded' || asset.size <= 0) {
+                throw new Error(`${assetName} is not fully uploaded (state=${asset.state}, size=${asset.size})`);
+              }
+              state = 'success';
+              description = `${assetName} uploaded (${asset.size} bytes)`;
+              core.info(`Verified ${asset.name}: ${asset.size} bytes, ${asset.state}`);
+            } catch (error) {
+              description = String(error.message || error).slice(0, 140);
+              core.setFailed(description);
+            } finally {
+              await github.rest.repos.createCommitStatus({
+                owner,
+                repo,
+                sha: context.sha,
+                state,
+                context: 'release/v1.0.0-asset',
+                description: description.slice(0, 140),
+                target_url: targetUrl,
+              });
+            }
