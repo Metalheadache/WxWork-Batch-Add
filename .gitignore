@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# PyInstaller
+build/
+dist/
+*.manifest
+*.spec.bak
+
+# 运行时生成的用户数据(不要提交)
+config.json
+run.log
+debug/
+logs/
+src/templates/custom/
+*.tmp
+
+# 用户的号码文件(隐私,切勿提交)
+*号码*.txt
+contact*.txt
+numbers*.txt
+
+# 打包产物
+*.exe
+*.zip
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
