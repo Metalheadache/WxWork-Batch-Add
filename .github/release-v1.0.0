@@ -1,2 +1,0 @@
-One-time sentinel used to bootstrap the v1.0.0 Windows build and GitHub Release from an empty repository.
-Future releases are triggered by pushing a v* tag.
