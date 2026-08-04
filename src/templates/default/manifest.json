@@ -1,0 +1,18 @@
+{
+  "captured_on": "深色主题, 2560x1440, 系统缩放150%, 企业微信 5.0.9.x",
+  "templates": [
+    "add_button.png.b64",
+    "added_flag.png.b64",
+    "error_confirm.png.b64",
+    "error_flag.png.b64",
+    "invite_send.png.b64",
+    "msg_button.png.b64",
+    "open_tag_row.png.b64",
+    "panel_confirm.png.b64",
+    "panel_first_chip.png.b64",
+    "panel_search.png.b64",
+    "result_row.png.b64",
+    "search_box.png.b64"
+  ],
+  "note": "这是内置默认模板,仅在与采集环境相近(深色/相近分辨率)时可靠。其它环境请用『校准向导』采集自己的模板。Base64 文本封装用于无损版本库传输,运行时自动解码。"
+}
